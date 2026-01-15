@@ -57,14 +57,18 @@ export async function listModels(token) {
  * Returns model quotas including remaining fraction and reset time
  *
  * @param {string} token - OAuth access token
+ * @param {string} [projectId] - Optional project ID for accurate quota info
  * @returns {Promise<Object>} Raw response from fetchAvailableModels API
  */
-export async function fetchAvailableModels(token) {
+export async function fetchAvailableModels(token, projectId = null) {
     const headers = {
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json',
         ...ANTIGRAVITY_HEADERS
     };
+
+    // Include project ID in body for accurate quota info (per Quotio implementation)
+    const body = projectId ? { project: projectId } : {};
 
     for (const endpoint of ANTIGRAVITY_ENDPOINT_FALLBACKS) {
         try {
@@ -72,7 +76,7 @@ export async function fetchAvailableModels(token) {
             const response = await fetch(url, {
                 method: 'POST',
                 headers,
-                body: JSON.stringify({})
+                body: JSON.stringify(body)
             });
 
             if (!response.ok) {
@@ -95,10 +99,11 @@ export async function fetchAvailableModels(token) {
  * Extracts quota info (remaining fraction and reset time) for each model
  *
  * @param {string} token - OAuth access token
+ * @param {string} [projectId] - Optional project ID for accurate quota info
  * @returns {Promise<Object>} Map of modelId -> { remainingFraction, resetTime }
  */
-export async function getModelQuotas(token) {
-    const data = await fetchAvailableModels(token);
+export async function getModelQuotas(token, projectId = null) {
+    const data = await fetchAvailableModels(token, projectId);
     if (!data || !data.models) return {};
 
     const quotas = {};
@@ -108,7 +113,8 @@ export async function getModelQuotas(token) {
 
         if (modelData.quotaInfo) {
             quotas[modelId] = {
-                remainingFraction: modelData.quotaInfo.remainingFraction ?? null,
+                // When remainingFraction is missing but resetTime is present, quota is exhausted (0%)
+                remainingFraction: modelData.quotaInfo.remainingFraction ?? (modelData.quotaInfo.resetTime ? 0 : null),
                 resetTime: modelData.quotaInfo.resetTime ?? null
             };
         }

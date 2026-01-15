@@ -69,15 +69,16 @@ export const ONBOARD_USER_ENDPOINTS = ANTIGRAVITY_ENDPOINT_FALLBACKS;
 
 // Hybrid headers specifically for loadCodeAssist
 // Uses google-api-nodejs-client User-Agent (required for project discovery on some accounts)
-export const LOAD_CODE_ASSIST_HEADERS = {
-    'User-Agent': 'google-api-nodejs-client/9.15.1',
-    'X-Goog-Api-Client': 'google-cloud-sdk vscode_cloudshelleditor/0.1',
-    'Client-Metadata': JSON.stringify({
-        ideType: 'IDE_UNSPECIFIED',
-        platform: 'PLATFORM_UNSPECIFIED',
-        pluginType: 'GEMINI'
-    })
-};
+// export const LOAD_CODE_ASSIST_HEADERS = {
+//     'User-Agent': 'google-api-nodejs-client/9.15.1',
+//     'X-Goog-Api-Client': 'google-cloud-sdk vscode_cloudshelleditor/0.1',
+//     'Client-Metadata': JSON.stringify({
+//         ideType: 'IDE_UNSPECIFIED',
+//         platform: 'PLATFORM_UNSPECIFIED',
+//         pluginType: 'GEMINI'
+//     })
+// };
+export const LOAD_CODE_ASSIST_HEADERS = ANTIGRAVITY_HEADERS;
 
 // Default project ID if none can be discovered
 export const DEFAULT_PROJECT_ID = 'rising-fact-p41fc';

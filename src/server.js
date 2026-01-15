@@ -214,7 +214,8 @@ app.get('/health', async (req, res) => {
 
                 try {
                     const token = await accountManager.getTokenForAccount(account);
-                    const quotas = await getModelQuotas(token);
+                    const projectId = account.subscription?.projectId || null;
+                    const quotas = await getModelQuotas(token, projectId);
 
                     // Format quotas for readability
                     const formattedQuotas = {};
@@ -309,11 +310,11 @@ app.get('/account-limits', async (req, res) => {
                 try {
                     const token = await accountManager.getTokenForAccount(account);
 
-                    // Fetch both quotas and subscription tier in parallel
-                    const [quotas, subscription] = await Promise.all([
-                        getModelQuotas(token),
-                        getSubscriptionTier(token)
-                    ]);
+                    // Fetch subscription tier first to get project ID
+                    const subscription = await getSubscriptionTier(token);
+
+                    // Then fetch quotas with project ID for accurate quota info
+                    const quotas = await getModelQuotas(token, subscription.projectId);
 
                     // Update account object with fresh data
                     account.subscription = {

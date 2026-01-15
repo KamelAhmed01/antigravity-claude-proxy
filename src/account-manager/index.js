@@ -14,7 +14,8 @@ import {
     resetAllRateLimits as resetLimits,
     markRateLimited as markLimited,
     markInvalid as markAccountInvalid,
-    getMinWaitTimeMs as getMinWait
+    getMinWaitTimeMs as getMinWait,
+    getRateLimitInfo as getLimitInfo
 } from './rate-limits.js';
 import {
     getTokenForAccount as fetchToken,
@@ -212,6 +213,16 @@ export class AccountManager {
      */
     getMinWaitTimeMs(modelId = null) {
         return getMinWait(this.#accounts, modelId);
+    }
+
+    /**
+     * Get rate limit info for a specific account and model
+     * @param {string} email - Email of the account
+     * @param {string} modelId - Model ID to check
+     * @returns {{isRateLimited: boolean, actualResetMs: number|null, waitMs: number}} Rate limit info
+     */
+    getRateLimitInfo(email, modelId) {
+        return getLimitInfo(this.#accounts, email, modelId);
     }
 
     /**
