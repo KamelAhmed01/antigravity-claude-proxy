@@ -10,19 +10,13 @@ import { HybridStrategy } from './hybrid-strategy.js';
 import { logger } from '../../utils/logger.js';
 import {
     SELECTION_STRATEGIES,
-    DEFAULT_SELECTION_STRATEGY
+    DEFAULT_SELECTION_STRATEGY,
+    STRATEGY_LABELS
 } from '../../constants.js';
 
 // Re-export strategy constants for convenience
 export const STRATEGY_NAMES = SELECTION_STRATEGIES;
 export const DEFAULT_STRATEGY = DEFAULT_SELECTION_STRATEGY;
-
-// Strategy display labels
-export const STRATEGY_LABELS = {
-    'sticky': 'Sticky (Cache Optimized)',
-    'round-robin': 'Round Robin (Load Balanced)',
-    'hybrid': 'Hybrid (Smart Distribution)'
-};
 
 /**
  * Create a strategy instance

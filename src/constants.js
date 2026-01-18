@@ -121,6 +121,13 @@ export const MIN_SIGNATURE_LENGTH = 50; // Minimum valid thinking signature leng
 export const SELECTION_STRATEGIES = ['sticky', 'round-robin', 'hybrid'];
 export const DEFAULT_SELECTION_STRATEGY = 'hybrid';
 
+// Strategy display labels
+export const STRATEGY_LABELS = {
+    'sticky': 'Sticky (Cache Optimized)',
+    'round-robin': 'Round Robin (Load Balanced)',
+    'hybrid': 'Hybrid (Smart Distribution)'
+};
+
 // Gemini-specific limits
 export const GEMINI_MAX_OUTPUT_TOKENS = 16384;
 
@@ -263,6 +270,7 @@ export default {
     isThinkingModel,
     OAUTH_CONFIG,
     OAUTH_REDIRECT_URI,
+    STRATEGY_LABELS,
     MODEL_FALLBACK_MAP,
     TEST_MODELS,
     DEFAULT_PRESETS,

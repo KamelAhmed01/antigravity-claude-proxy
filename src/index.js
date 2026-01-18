@@ -60,8 +60,11 @@ const server = app.listen(PORT, () => {
     const align4 = (text) => text + ' '.repeat(Math.max(0, 58 - text.length));
     
     // Build Control section dynamically
+    const strategyOptions = `(${STRATEGY_NAMES.join('/')})`;
+    const strategyLine2 = '                       ' + strategyOptions;
     let controlSection = '║  Control:                                                    ║\n';
-    controlSection += '║    --strategy=<s>     Set selection strategy (sticky/hybrid) ║\n';
+    controlSection += '║    --strategy=<s>     Set account selection strategy         ║\n';
+    controlSection += `${border}  ${align(strategyLine2)}${border}\n`;
     if (!isDebug) {
         controlSection += '║    --debug            Enable debug logging                   ║\n';
     }
