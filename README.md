@@ -35,58 +35,69 @@ A proxy server that exposes an **Anthropic-compatible API** backed by **Antigrav
 
 ## Installation
 
-### Automated Setup (Recommended)
-
-Run the setup command to automatically install Claude Code CLI and create a global `proxy-claude` command:
+### Quick Install (Recommended)
 
 ```bash
-# Install globally (recommended)
+# Install globally
 npm install -g @kamel-ahmed/proxy-claude
-proxy-claude setup
 
-# Or run via npx
-npx @kamel-ahmed/proxy-claude setup
-
-# If cloned locally
-npm run setup
+# Run setup wizard
+proxy-claude init
 ```
 
-After setup completes, you can run Claude with the proxy from anywhere:
+The setup wizard will:
+1. ✅ Check prerequisites (Node.js, Claude Code CLI)
+2. ✅ Help you add Google account(s)
+3. ✅ Let you pick models for each tier (Opus, Sonnet, Haiku)
+4. ✅ Auto-configure `~/.claude/settings.json`
+
+After setup, just run:
 
 ```bash
 proxy-claude
 ```
 
-The `proxy-claude` command will:
-1. Start the proxy server in the background.
-2. Wait for the server to be ready.
-3. Launch `claude` (Claude Code CLI) connected to the proxy.
-4. Automatically shut down the proxy when you exit Claude.
+This will:
+1. Start the proxy server in the background
+2. Wait for the server to be ready
+3. Launch Claude Code CLI connected to the proxy
+4. Automatically shut down the proxy when you exit
 
-You can also customize the port and pass arguments to Claude:
+### CLI Commands
 
 ```bash
-# Use a custom port
+proxy-claude              # Start proxy + Claude Code (default)
+proxy-claude init         # Run setup wizard
+proxy-claude start        # Start proxy server only
+proxy-claude stop         # Stop proxy server  
+proxy-claude status       # Check if proxy is running
+proxy-claude accounts     # Manage Google accounts
+proxy-claude refresh      # Refresh account tokens
+proxy-claude --help       # Show all commands
+```
+
+Custom port:
+
+```bash
 PORT=3000 proxy-claude
-
-# Pass arguments to Claude
-proxy-claude --model sonnet
+proxy-claude --port 3000
 ```
 
-> **Note:** The setup requires write access to `/usr/local/bin`. If prompted, enter your password to allow installation.
+### Cross-Platform Support
 
-### Option 1: npm (Manual)
+Works on **Windows**, **macOS**, and **Linux** with full feature parity.
+
+### Alternative: npx (No Install)
 
 ```bash
-# Run directly with npx (no install needed)
-npx @kamel-ahmed/proxy-claude start
+# Run directly without installing
+npx @kamel-ahmed/proxy-claude
 
-# Or install globally
-npm install -g @kamel-ahmed/proxy-claude
-proxy-claude start
+# Or just start the server
+npx @kamel-ahmed/proxy-claude start
 ```
 
-### Option 2: Clone Repository
+### Development: Clone Repository
 
 ```bash
 git clone https://github.com/badri-s2001/antigravity-claude-proxy.git
@@ -99,22 +110,23 @@ npm start
 
 ## Quick Start
 
-### 1. Start the Proxy Server
+If you used `proxy-claude init`, you're already set up! Just run:
 
 ```bash
-# If installed via npm
+proxy-claude
+```
+
+### Manual Setup (Alternative)
+
+#### 1. Start the Proxy Server
+
+```bash
 proxy-claude start
-
-# If using npx
-npx @kamel-ahmed/proxy-claude start
-
-# If cloned locally
-npm start
 ```
 
 The server runs on `http://localhost:8080` by default.
 
-### 2. Link Account(s)
+#### 2. Link Account(s)
 
 Choose one of the following methods to authorize the proxy:
 

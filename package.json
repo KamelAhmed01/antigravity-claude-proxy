@@ -1,6 +1,6 @@
 {
   "name": "@kamel-ahmed/proxy-claude",
-  "version": "1.0.3",
+  "version": "1.0.5",
   "description": "Proxy server to use Antigravity's Claude models with Claude Code CLI - run 'proxy-claude' to start",
   "main": "src/index.js",
   "type": "module",
@@ -26,7 +26,7 @@
     "accounts:verify": "node src/cli/accounts.js verify",
     "refresh": "node src/cli/refresh.js",
     "refresh:force": "node src/cli/refresh.js --force",
-    "setup": "node bin/cli.js setup",
+    "setup": "node bin/cli.js init",
     "test": "node tests/run-all.cjs",
     "test:signatures": "node tests/test-thinking-signatures.cjs",
     "test:multiturn": "node tests/test-multiturn-thinking-tools.cjs",

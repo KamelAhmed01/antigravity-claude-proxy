@@ -10,6 +10,44 @@ The proxy translates requests from Anthropic Messages API format → Google Gene
 
 ## Commands
 
+### CLI Tool (npm package: @kamel-ahmed/proxy-claude)
+
+```bash
+# Install globally (recommended)
+npm install -g @kamel-ahmed/proxy-claude
+
+# Run setup wizard (first time)
+proxy-claude init
+
+# Start proxy + Claude Code (default command)
+proxy-claude
+
+# Start proxy server only
+proxy-claude start
+
+# Stop proxy server
+proxy-claude stop
+
+# Check proxy status
+proxy-claude status
+
+# Account management
+proxy-claude accounts add       # Add Google account via OAuth
+proxy-claude accounts list      # List configured accounts
+proxy-claude accounts remove    # Remove accounts
+proxy-claude accounts verify    # Verify tokens
+
+# Refresh tokens
+proxy-claude refresh            # Check and refresh tokens
+proxy-claude refresh --force    # Force refresh all
+
+# Custom port
+PORT=3000 proxy-claude
+proxy-claude --port 3000
+```
+
+### Development Commands
+
 ```bash
 # Install dependencies (automatically builds CSS via prepare hook)
 npm install
@@ -36,7 +74,7 @@ npm run dev:full         # Watch both CSS and server files (recommended for fron
 npm run build:css        # Build CSS once (minified)
 npm run watch:css        # Watch CSS files for changes
 
-# Account management
+# Account management (local dev)
 npm run accounts         # Interactive account management
 npm run accounts:add     # Add a new Google account via OAuth
 npm run accounts:add -- --no-browser  # Add account on headless server (manual code input)
@@ -116,7 +154,10 @@ src/
 │   └── usage-stats.js          # Request tracking and history persistence
 │
 ├── cli/                        # CLI tools
-│   └── accounts.js             # Account management CLI
+│   ├── accounts.js             # Account management CLI
+│   ├── onboard.js              # Setup wizard (cross-platform)
+│   ├── refresh.js              # Token refresh CLI
+│   └── setup.js                # Legacy bash setup script
 │
 ├── format/                     # Format conversion (Anthropic ↔ Google)
 │   ├── index.js                # Re-exports all converters
@@ -170,6 +211,37 @@ public/
     ├── models.html
     ├── settings.html
     └── logs.html
+```
+
+**CLI Structure (bin/):**
+
+```
+bin/
+└── cli.js                      # Main CLI entry point (cross-platform)
+                                # Commands: (default), init, start, stop, status, accounts, refresh
+```
+
+**Key CLI Files:**
+
+- **bin/cli.js**: Main CLI entry point, handles all commands, cross-platform (Windows/macOS/Linux)
+- **src/cli/onboard.js**: Setup wizard with model selection, account setup, auto-configuration
+- **src/cli/accounts.js**: Account management (add/list/remove/verify)
+- **src/cli/refresh.js**: Token refresh and validation
+
+**Cross-Platform Patterns:**
+```javascript
+// Platform detection
+const IS_WINDOWS = process.platform === 'win32';
+
+// Command existence check
+const checkCmd = IS_WINDOWS ? `where ${cmd}` : `which ${cmd}`;
+
+// Port check (no curl needed)
+http.get(`http://localhost:${port}/health`, ...)
+
+// Process killing
+// Windows: netstat -ano + taskkill /F /PID
+// Unix: lsof -ti tcp:PORT | xargs kill
 ```
 
 **Key Modules:**
