@@ -25,12 +25,79 @@ A proxy server that exposes an **Anthropic-compatible API** backed by **Antigrav
 
 ## Prerequisites
 
-- **Node.js** 18 or later
-- **Antigravity** installed (for single-account mode) OR Google account(s) for multi-account mode
+- **Node.js** 18 or later (download from [nodejs.org](https://nodejs.org))
+- **Claude Code CLI** (installed automatically by setup wizard)
+- Google account(s) for authentication
 
 ---
 
 ## Installation
+
+### Windows Installation
+
+**Step 1: Install Node.js**
+
+1. Download Node.js 18+ from [nodejs.org](https://nodejs.org)
+2. Run the installer and follow the setup wizard
+3. Restart your computer (or just close & reopen PowerShell)
+4. Verify installation in PowerShell:
+   ```powershell
+   node --version
+   npm --version
+   ```
+
+**Step 2: Install proxy-claude**
+
+Open PowerShell or Command Prompt and run:
+
+```powershell
+npm install -g @kamel-ahmed/proxy-claude
+proxy-claude init
+```
+
+**Step 3: Complete Setup Wizard**
+
+The wizard will:
+- ✅ Check Node.js and Claude Code CLI
+- ✅ Add your Google account(s)
+- ✅ Pick models for each tier
+- ✅ Auto-configure settings
+
+**Step 4: Start Using**
+
+```powershell
+proxy-claude
+```
+
+That's it! Claude Code will launch connected to the proxy.
+
+---
+
+### macOS/Linux Installation
+
+**Step 1: Install Node.js** (if not already installed)
+
+```bash
+# macOS with Homebrew
+brew install node
+
+# Or download from https://nodejs.org
+```
+
+**Step 2: Install proxy-claude**
+
+```bash
+npm install -g @kamel-ahmed/proxy-claude
+proxy-claude init
+```
+
+**Step 3: Start Using**
+
+```bash
+proxy-claude
+```
+
+---
 
 ### Quick Install (Recommended)
 
@@ -59,6 +126,97 @@ This will:
 2. Wait for the server to be ready
 3. Launch Claude Code CLI connected to the proxy
 4. Automatically shut down the proxy when you exit
+
+---
+
+### Quick Install (All Platforms)
+
+```bash
+# Install globally
+npm install -g @kamel-ahmed/proxy-claude
+
+# Run setup wizard
+proxy-claude init
+```
+
+The setup wizard will:
+1. ✅ Check prerequisites (Node.js, Claude Code CLI)
+2. ✅ Help you add Google account(s)
+3. ✅ Let you pick models for each tier (Opus, Sonnet, Haiku)
+4. ✅ Auto-configure `~/.claude/settings.json`
+
+After setup, just run:
+
+```bash
+proxy-claude
+```
+
+This will:
+1. Start the proxy server in the background
+2. Wait for the server to be ready
+3. Launch Claude Code CLI connected to the proxy
+4. Automatically shut down the proxy when you exit
+
+---
+
+## Troubleshooting
+
+### Windows: "npm: The term 'npm' is not recognized"
+
+**Solution:** Node.js wasn't installed correctly or PowerShell needs to be restarted.
+
+1. Download and reinstall Node.js from [nodejs.org](https://nodejs.org)
+2. Close PowerShell/Command Prompt completely
+3. Reopen PowerShell as Administrator
+4. Try again: `npm --version`
+
+### Windows: "proxy-claude: The term 'proxy-claude' is not recognized"
+
+**Solution:** npm install path isn't in your PATH environment variable.
+
+```powershell
+# Find where npm installed it
+npm config get prefix
+
+# Add to PATH (replace C:\Users\YourUsername\AppData\Roaming\npm if different):
+$env:Path += ";C:\Users\$env:USERNAME\AppData\Roaming\npm"
+```
+
+Then close and reopen PowerShell.
+
+### Port Already in Use
+
+If port 8080 is already in use, specify a different port:
+
+```bash
+PORT=3000 proxy-claude
+# or
+proxy-claude --port 3000
+```
+
+### "Claude Code CLI not found" Error
+
+The setup wizard will automatically install Claude Code CLI for you. If it fails:
+
+```bash
+npm install -g @anthropic-ai/claude-code
+```
+
+### Settings Not Persisting
+
+The wizard auto-configures `~/.claude/settings.json`. You can verify it was created:
+
+**Windows:**
+```powershell
+notepad "$env:USERPROFILE\.claude\settings.json"
+```
+
+**macOS/Linux:**
+```bash
+cat ~/.claude/settings.json
+```
+
+---
 
 ### CLI Commands
 
