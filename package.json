@@ -1,11 +1,11 @@
 {
-  "name": "antigravity-claude-proxy",
-  "version": "1.2.6",
-  "description": "Proxy server to use Antigravity's Claude models with Claude Code CLI",
+  "name": "@kamel-ahmed/proxy-claude",
+  "version": "1.0.3",
+  "description": "Proxy server to use Antigravity's Claude models with Claude Code CLI - run 'proxy-claude' to start",
   "main": "src/index.js",
   "type": "module",
   "bin": {
-    "antigravity-claude-proxy": "bin/cli.js"
+    "proxy-claude": "bin/cli.js"
   },
   "files": [
     "src",
@@ -24,6 +24,8 @@
     "accounts:list": "node src/cli/accounts.js list",
     "accounts:remove": "node src/cli/accounts.js remove",
     "accounts:verify": "node src/cli/accounts.js verify",
+    "refresh": "node src/cli/refresh.js",
+    "refresh:force": "node src/cli/refresh.js --force",
     "setup": "node bin/cli.js setup",
     "test": "node tests/run-all.cjs",
     "test:signatures": "node tests/test-thinking-signatures.cjs",
@@ -45,15 +47,18 @@
     "proxy",
     "vertex-ai"
   ],
-  "author": "Badri Narayanan",
+  "author": "Kamel Ahmed",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/badri-s2001/antigravity-claude-proxy.git"
+    "url": "git+https://github.com/kamel-ahmed/proxy-claude.git"
   },
-  "homepage": "https://github.com/badri-s2001/antigravity-claude-proxy#readme",
+  "homepage": "https://github.com/kamel-ahmed/proxy-claude#readme",
   "bugs": {
-    "url": "https://github.com/badri-s2001/antigravity-claude-proxy/issues"
+    "url": "https://github.com/kamel-ahmed/proxy-claude/issues"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "engines": {
     "node": ">=18.0.0"

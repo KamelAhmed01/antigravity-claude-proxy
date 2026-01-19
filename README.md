@@ -1,7 +1,7 @@
 # Antigravity Claude Proxy
 
-[![npm version](https://img.shields.io/npm/v/antigravity-claude-proxy.svg)](https://www.npmjs.com/package/antigravity-claude-proxy)
-[![npm downloads](https://img.shields.io/npm/dm/antigravity-claude-proxy.svg)](https://www.npmjs.com/package/antigravity-claude-proxy)
+[![npm version](https://img.shields.io/npm/v/@kamel-ahmed/proxy-claude.svg)](https://www.npmjs.com/package/@kamel-ahmed/proxy-claude)
+[![npm downloads](https://img.shields.io/npm/dm/@kamel-ahmed/proxy-claude.svg)](https://www.npmjs.com/package/@kamel-ahmed/proxy-claude)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 <a href="https://buymeacoffee.com/badrinarayanans" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" height="50"></a>
@@ -40,11 +40,12 @@ A proxy server that exposes an **Anthropic-compatible API** backed by **Antigrav
 Run the setup command to automatically install Claude Code CLI and create a global `proxy-claude` command:
 
 ```bash
-# If running via npx
-npx antigravity-claude-proxy@latest setup
+# Install globally (recommended)
+npm install -g @kamel-ahmed/proxy-claude
+proxy-claude setup
 
-# If installed globally
-antigravity-claude-proxy setup
+# Or run via npx
+npx @kamel-ahmed/proxy-claude setup
 
 # If cloned locally
 npm run setup
@@ -78,11 +79,11 @@ proxy-claude --model sonnet
 
 ```bash
 # Run directly with npx (no install needed)
-npx antigravity-claude-proxy@latest start
+npx @kamel-ahmed/proxy-claude start
 
 # Or install globally
-npm install -g antigravity-claude-proxy@latest
-antigravity-claude-proxy start
+npm install -g @kamel-ahmed/proxy-claude
+proxy-claude start
 ```
 
 ### Option 2: Clone Repository
@@ -102,10 +103,10 @@ npm start
 
 ```bash
 # If installed via npm
-antigravity-claude-proxy start
+proxy-claude start
 
 # If using npx
-npx antigravity-claude-proxy@latest start
+npx @kamel-ahmed/proxy-claude start
 
 # If cloned locally
 npm start
@@ -129,13 +130,13 @@ If you prefer the terminal or are on a remote server:
 
 ```bash
 # Desktop (opens browser)
-antigravity-claude-proxy accounts add
+proxy-claude accounts add
 
 # Headless (Docker/SSH)
-antigravity-claude-proxy accounts add --no-browser
+proxy-claude accounts add --no-browser
 ```
 
-> For full CLI account management options, run `antigravity-claude-proxy accounts --help`.
+> For full CLI account management options, run `proxy-claude accounts --help`.
 
 #### **Method C: Automatic (Antigravity Users)**
 
@@ -144,7 +145,7 @@ If you have the **Antigravity** app installed and logged in, the proxy will auto
 To use a custom port:
 
 ```bash
-PORT=3001 antigravity-claude-proxy start
+PORT=3001 proxy-claude start
 ```
 
 ### 3. Verify It's Working
@@ -252,7 +253,7 @@ Restart your terminal for changes to take effect.
 
 ```bash
 # Make sure the proxy is running first
-antigravity-claude-proxy start
+proxy-claude start
 
 # In another terminal, run Claude Code
 claude
@@ -326,9 +327,9 @@ Choose a strategy based on your needs:
 **Configure via CLI:**
 
 ```bash
-antigravity-claude-proxy start --strategy=hybrid    # Default: smart distribution
-antigravity-claude-proxy start --strategy=sticky    # Cache-optimized
-antigravity-claude-proxy start --strategy=round-robin  # Load-balanced
+proxy-claude start --strategy=hybrid    # Default: smart distribution
+proxy-claude start --strategy=sticky    # Cache-optimized
+proxy-claude start --strategy=round-robin  # Load-balanced
 ```
 
 **Or via WebUI:** Settings → Server → Account Selection Strategy
@@ -357,13 +358,13 @@ If you prefer using the terminal for management:
 
 ```bash
 # List all accounts
-antigravity-claude-proxy accounts list
+proxy-claude accounts list
 
 # Verify account health
-antigravity-claude-proxy accounts verify
+proxy-claude accounts verify
 
 # Interactive CLI menu
-antigravity-claude-proxy accounts
+proxy-claude accounts
 ```
 
 ---
@@ -472,7 +473,7 @@ If using single-account mode with Antigravity:
 1. Make sure Antigravity app is installed and running
 2. Ensure you're logged in to Antigravity
 
-Or add accounts via OAuth instead: `antigravity-claude-proxy accounts add`
+Or add accounts via OAuth instead: `proxy-claude accounts add`
 
 ### 401 Authentication Errors
 
@@ -485,7 +486,7 @@ curl -X POST http://localhost:8080/refresh-token
 Or re-authenticate the account:
 
 ```bash
-antigravity-claude-proxy accounts
+proxy-claude accounts
 ```
 
 ### Rate Limiting (429)
@@ -497,7 +498,7 @@ With multiple accounts, the proxy automatically switches to the next available a
 Re-authenticate the account:
 
 ```bash
-antigravity-claude-proxy accounts
+proxy-claude accounts
 # Choose "Re-authenticate" for the invalid account
 ```
 
