@@ -32,6 +32,7 @@ COMMANDS:
   accounts remove       Remove accounts interactively
   accounts verify       Verify account tokens are valid
   accounts clear        Remove all accounts
+  setup                 Install Claude Code CLI and create global 'proxy-claude' command
 
 OPTIONS:
   --help, -h            Show this help message
@@ -74,6 +75,10 @@ async function main() {
 
   // Handle commands
   switch (command) {
+    case 'setup':
+      await import('../src/cli/setup.js').then(module => module.runSetup());
+      break;
+
     case 'start':
     case undefined:
       // Default to starting the server

@@ -35,7 +35,46 @@ A proxy server that exposes an **Anthropic-compatible API** backed by **Antigrav
 
 ## Installation
 
-### Option 1: npm (Recommended)
+### Automated Setup (Recommended)
+
+Run the setup command to automatically install Claude Code CLI and create a global `proxy-claude` command:
+
+```bash
+# If running via npx
+npx antigravity-claude-proxy@latest setup
+
+# If installed globally
+antigravity-claude-proxy setup
+
+# If cloned locally
+npm run setup
+```
+
+After setup completes, you can run Claude with the proxy from anywhere:
+
+```bash
+proxy-claude
+```
+
+The `proxy-claude` command will:
+1. Start the proxy server in the background.
+2. Wait for the server to be ready.
+3. Launch `claude` (Claude Code CLI) connected to the proxy.
+4. Automatically shut down the proxy when you exit Claude.
+
+You can also customize the port and pass arguments to Claude:
+
+```bash
+# Use a custom port
+PORT=3000 proxy-claude
+
+# Pass arguments to Claude
+proxy-claude --model sonnet
+```
+
+> **Note:** The setup requires write access to `/usr/local/bin`. If prompted, enter your password to allow installation.
+
+### Option 1: npm (Manual)
 
 ```bash
 # Run directly with npx (no install needed)
