@@ -626,7 +626,3 @@ This project is based on insights and code from:
 MIT
 
 ---
-
-## Star History
-
-[![Star History Chart](https://api.star-history.com/svg?repos=badrisnarayanan/antigravity-claude-proxy&type=date&legend=top-left&cache-control=no-cache)](https://www.star-history.com/#badrisnarayanan/antigravity-claude-proxy&type=date&legend=top-left)
