@@ -1,7 +1,7 @@
 {
   "name": "@kamel-ahmed/proxy-claude",
-  "version": "1.0.5",
-  "description": "Proxy server to use Antigravity's Claude models with Claude Code CLI - run 'proxy-claude' to start",
+  "version": "1.0.6",
+  "description": "Cross-platform CLI proxy for Antigravity Cloud Code. Use Claude & Gemini models with Claude Code CLI on Windows, macOS, and Linux.",
   "main": "src/index.js",
   "type": "module",
   "bin": {
@@ -45,17 +45,22 @@
     "anthropic",
     "antigravity",
     "proxy",
-    "vertex-ai"
+    "gemini",
+    "claude-code",
+    "cross-platform",
+    "windows",
+    "macos",
+    "linux"
   ],
-  "author": "Kamel Ahmed",
+  "author": "Kamel Ahmed <kamel.ahmed.mostafa.kamel@gmail.com>",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kamel-ahmed/proxy-claude.git"
+    "url": "git+https://github.com/KamelAhmed01/antigravity-claude-proxy.git"
   },
-  "homepage": "https://github.com/kamel-ahmed/proxy-claude#readme",
+  "homepage": "https://github.com/KamelAhmed01/antigravity-claude-proxy#readme",
   "bugs": {
-    "url": "https://github.com/kamel-ahmed/proxy-claude/issues"
+    "url": "https://github.com/KamelAhmed01/antigravity-claude-proxy/issues"
   },
   "publishConfig": {
     "access": "public"
